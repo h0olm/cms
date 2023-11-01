@@ -1,0 +1,51 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Contact>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "_Layout.cshtml";
+    var contactForm = new cms.Models.ContactForm();
+}
+
+<section class="contactFirstSection">
+    <div class="contactTitleContainer">
+        <h1>Lets Connect</h1>
+    </div>
+</section>
+
+<section class="contactSecondSection">
+    <div class="infoCards">
+        <div class="cardItem">
+            <img src=" @Model.Value("addressIcon")" alt="" class="cardIcon" />
+            <h1 class="cardHead">Visit Us</h1>
+            <p class="cardParagraf">
+                @Model.Value("addresStreet") <br />
+                @Model.Value("addressCode")
+            </p>
+        </div>
+        <div class="cardItem">
+            <img src="@Model.Value("phoneIcon")" alt="" class="cardIcon" />
+            <h1 class="cardHead">Call Us</h1>
+            <p class="cardParagraf">
+                @Model.Value("PhoneNumberOne") <br />
+                @Model.Value("PhoneNumberTwo")
+            </p>
+        </div>
+        <div class="cardItem">
+            <img src="@Model.Value("emailIcon")" alt="" class="cardIcon" />
+            <h1 class="cardHead">Email Us</h1>
+            <p class="cardParagraf">
+                @Model.Value("EmailOne") <br />
+                @Model.Value("EmailTwo")
+            </p>
+        </div>
+    </div>
+
+      @using (Html.BeginUmbracoForm("Contact", "Views", FormMethod.Post))
+        {
+        <h1>Leave us a message for any information.</h1>
+        <input asp-for="@contactForm.Name" type="text" placeholder="Name*" required />
+        <input asp-for ="@contactForm.Email" type="email" placeholder="Email*" required />
+        <input asp-for="@contactForm.Message" type="text" placeholder="Your message*" required />
+        <input type="button" value="Send Message">
+    }
+</section>
